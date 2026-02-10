@@ -11,6 +11,7 @@
 </p>
 
 ## Description
+
 This project demonstrates video processing using Gaussian Blur implemented in three different ways:
 - Serial CPU processing
 - Parallel CPU processing using std::thread and std::future
@@ -20,16 +21,17 @@ Face detection is applied using Haar Cascade, and detected faces are excluded fr
 
  ---
 
-### 📝 Testni video fajlovi
+### 📝 Test video files
 
-Za testiranje aplikacije, generisao sam dva video fajla koristeći **FFmpeg**:
+For testing the application, I generated two video files using **FFmpeg**:
 
-- **input5s.mp4** – 5 sekundi, 640x480, 30 FPS  
-- **input30s.mp4** – 30 sekundi, 640x480, 30 FPS
+- **input5s.mp4** – 5 seconds, 640x480, 30 FPS  
+- **input30s.mp4** – 30 seconds, 640x480, 30 FPS
 
   ---
   
 ## Features
+
 - Separable Gaussian Blur (horizontal + vertical pass)
 - CPU parallelization using std::thread
 - GPU acceleration using OpenCL
@@ -40,6 +42,7 @@ Za testiranje aplikacije, generisao sam dva video fajla koristeći **FFmpeg**:
   ---
 
 ## Technologies
+
 - C++17
 - OpenCV
 - std::thread / std::future
@@ -48,69 +51,81 @@ Za testiranje aplikacije, generisao sam dva video fajla koristeći **FFmpeg**:
 
   ---
 
-## 🧠 Detekcija lica
+## 🧠 Face Detection  
 
-- Za prepoznavanje lica korišćen je **Haar Cascade Classifier** (`haarcascade_frontalface_default.xml`) iz OpenCV-a.  
-- Detekcija je izvršena svaka 5. frejm (detekcija u intervalima) radi optimizacije performansi.  
-
----
-
-## ⚙️ Sistem i hardverski zahtevi
-
-Da bi aplikacija ispravno radila sa paralelnom GPU obradom koristeći **OpenCL**, neophodno je ispuniti sledeće zahteve:
-
-1. **Grafička kartica sa podrškom za OpenCL**  
-   - GPU mora imati **OpenCL podršku**.  
-   - Potrebno je instalirati **najnovije drajvere za GPU** koji uključuju OpenCL runtime.  
-   - Testiranje dostupnosti OpenCL uređaja se vrši preko aplikacije pri pokretanju (aplikacija će ispisati broj i tip OpenCL uređaja).
-   - OpenCL takođe mora biti **dostupan u CMake projektu**, uključujući `include` i `lib` direktorijume.
-
-2. **OpenCV biblioteka**  
-   - OpenCV mora biti **instaliran i kompajliran sa podrškom za OpenCL** (`WITH_OPENCL=ON`) da bi GPU verzija funkcija radila.  
-   - Verzija OpenCV-a: **>=4.5** preporučena.  
-
-3. **C++17 kompatibilan kompajler**  
-   - GCC >= 9, MSVC 2019 ili sličan, sa podrškom za **std::filesystem, std::thread, std::future**.
-
-4. **Opcionalno: FFmpeg**  
-   - Ako želite generisati testne video fajlove (`input5s.mp4`, `input30s.mp4`) ili konvertovati video formate, FFmpeg treba biti instaliran i dostupan iz komandne linije.
+For face recognition, the Haar Cascade Classifier (`haarcascade_frontalface_default.xml`) from OpenCV was used.  
+Detection is performed every 5th frame (interval detection) for performance optimization.
 
 ---
 
-## 🖥️ Testni uređaj
+## ⚙️ System & Hardware Requirements  
+To properly run the application with GPU parallel processing using OpenCL, the following requirements must be met:
 
-| Komponenta            | Specifikacija                               |
-|-----------------------|---------------------------------------------|
-| Operativni sistem      | Microsoft Windows 11 Pro                    |
-| Procesor              | AMD Ryzen 5 5500, 6 jezgara / 12 niti      |
-| RAM                   | 16 GB                                       |
-| Grafička kartica      | AMD Radeon RX 6650 XT (OpenCL podrška)     |
+**Graphics Card with OpenCL Support**  
+- GPU must support OpenCL.  
+- Latest GPU drivers including OpenCL runtime must be installed.  
+- Availability of OpenCL devices is checked by the application at startup (it will display the number and type of OpenCL devices).  
+- OpenCL must also be included in the CMake project, with proper include and lib directories.
+
+**OpenCV Library**  
+- OpenCV must be installed and compiled with OpenCL support (`WITH_OPENCL=ON`) for GPU function execution.  
+- Recommended OpenCV version: >=4.5.
+
+**C++17 Compatible Compiler**  
+- GCC >= 9, MSVC 2019, or similar, with support for `std::filesystem`, `std::thread`, `std::future`.
+
+**Optional: FFmpeg**  
+- If you want to generate test videos (`input5s.mp4`, `input30s.mp4`) or convert video formats, FFmpeg must be installed and available from the command line.
+
+  ---
+
+## 🖥️ Test Device  
+
+| Component           | Specification                     |
+|--------------------|----------------------------------|
+| Operating System    | Microsoft Windows 11 Pro         |
+| CPU                 | AMD Ryzen 5 5500, 6 cores / 12 threads |
+| RAM                 | 16 GB                            |
+| GPU                 | AMD Radeon RX 6650 XT (OpenCL support) |
 
 ---
 
-## 📹 Testni video
-
-- Fajl: `inputFACE.mp4`  
-- Trajanje: 26 sekundi  
-- Rezolucija: 852x480  
+## 📹 Test Video  
+- File: `inputFACE.mp4`  
+- Duration: 26 seconds  
+- Resolution: 852x480  
 - FPS: 30  
-- Napomena: Za paralelno GPU **detekciju lica** korišćena je vrijednost **Paralelno (CPU)**.  
-- Kernel za Gaussian Blur: **K-15**  
+- Note: For parallel GPU face detection, the CPU parallel detection method was used.  
+- Gaussian Blur Kernel: K-15
+
+  ---
+
+## ⏱️ Processing Results  
+
+| Method                        | Face Detection [ms] | Gaussian Blur [ms] | Total Time [ms] |
+|--------------------------------|-------------------|------------------|----------------|
+| Sequential (CPU) (K-15)        | 4,133             | 34,822           | 38,955         |
+| Parallel (CPU) (K-15)          | 1,743             | 7,145            | 8,888          |
+| Parallel (GPU – OpenCL) (K-15) | ---- (1,743)      | 2,775            | 4,518          |
+
+## 💡 Note:  
+The values in parentheses for the GPU method indicate that CPU parallel detection was still used for face detection, while Gaussian Blur was applied on the GPU.  
 
 ---
 
-## ⏱️ Rezultati obrade
+## 🖼️ Application Screenshots  
 
-| Metoda                        | Detekcija lica [ms] | Gaussian Blur [ms] | Ukupno vrijeme [ms] |
-|--------------------------------|-------------------|------------------|--------------------|
-| Sekvencijalno (CPU) (K-15)     | 4,133             | 34,822           | 38,955             |
-| Paralelno (CPU) (K-15)         | 1,743             | 7,145            | 8,888              |
-| Paralelno (GPU – OpenCL) (K-15)| ---- (1,743)      | 2,775            | 4,518              |
+Here is how the application looks during execution:
 
----
+<div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+  <img width="681" height="967" alt="ParallelCPUGPU" src="https://github.com/user-attachments/assets/c1af6c54-e48a-4bb1-94a8-5d93f402f409" />
+  <img width="644" height="126" alt="ParallelCPUGPU2" src="https://github.com/user-attachments/assets/f0ce9e78-dcbe-46f7-a865-366498df7d3e" />
+</div>
 
-💡 **Napomena:**  
-Vrijednosti u zagradama kod GPU metode označavaju da se za detekciju lica i dalje koristi **CPU paralelna detekcija**, dok se Gaussian Blur primjenjuje na GPU-u.
+> 🔹 Note: The video processing results are available in the repository under the following names:  
+> - `output_serialCPU.mp4` – sequential CPU processing  
+> - `output_parallelCPU.mp4` – parallel CPU processing  
+> - `output_parallelGPU.mp4` – parallel GPU processing
 
 ## Build Instructions
 ```bash
