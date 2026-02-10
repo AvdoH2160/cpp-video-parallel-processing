@@ -32,6 +32,7 @@ Face detection is applied using Haar Cascade, and detected faces are excluded fr
 ## Build Instructions
 ```bash
 mkdir build
-cd build
-cmake ..
-cmake --build .
+cmake -B .\build\
+cmake --build .\build\
+cmake --build .\build\ --config Release
+.\build\Release\OpenCVExample.exe .
