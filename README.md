@@ -48,6 +48,13 @@ Za testiranje aplikacije, generisao sam dva video fajla koristeći **FFmpeg**:
 
   ---
 
+## 🧠 Detekcija lica
+
+- Za prepoznavanje lica korišćen je **Haar Cascade Classifier** (`haarcascade_frontalface_default.xml`) iz OpenCV-a.  
+- Detekcija je izvršena svaka 5. frejm (detekcija u intervalima) radi optimizacije performansi.  
+
+---
+
 ## ⚙️ Sistem i hardverski zahtevi
 
 Da bi aplikacija ispravno radila sa paralelnom GPU obradom koristeći **OpenCL**, neophodno je ispuniti sledeće zahteve:
