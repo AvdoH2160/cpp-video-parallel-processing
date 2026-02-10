@@ -1,5 +1,14 @@
 # C++ Video Parallel Processing (CPU & GPU)
 
+## 🔧 Tech Stack
+
+<p align="left">
+  <a href="https://isocpp.org/" target="_blank"><img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++"/></a>
+  <a href="https://www.khronos.org/opencl/" target="_blank"><img src="https://img.shields.io/badge/OpenCL-F0DB4F?style=for-the-badge&logo=khronos&logoColor=black" alt="OpenCL"/></a>
+  <a href="https://opencv.org/" target="_blank"><img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV"/></a>
+  <a href="https://cmake.org/" target="_blank"><img src="https://img.shields.io/badge/CMake-064F8C?style=for-the-badge&logo=cmake&logoColor=white" alt="CMake"/></a>
+</p>
+
 ## Description
 This project demonstrates video processing using Gaussian Blur implemented in three different ways:
 - Serial CPU processing
