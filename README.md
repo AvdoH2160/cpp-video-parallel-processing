@@ -32,12 +32,6 @@ Face detection is applied using Haar Cascade, and detected faces are excluded fr
 - OpenCL
 - CMake
 
-## Project Structure
-- src/ – main C++ source file
-- opencl/ – OpenCL kernel files
-- data/ – input video and Haar cascade
-- results/ – execution time results
-
 ## Build Instructions
 ```bash
 mkdir build
