@@ -7,6 +7,7 @@
   <a href="https://www.khronos.org/opencl/" target="_blank"><img src="https://img.shields.io/badge/OpenCL-F0DB4F?style=for-the-badge&logo=khronos&logoColor=black" alt="OpenCL"/></a>
   <a href="https://opencv.org/" target="_blank"><img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV"/></a>
   <a href="https://cmake.org/" target="_blank"><img src="https://img.shields.io/badge/CMake-064F8C?style=for-the-badge&logo=cmake&logoColor=white" alt="CMake"/></a>
+  <a href="https://ffmpeg.org/" target="_blank"><img src="https://img.shields.io/badge/FFmpeg-FFFFFF?style=for-the-badge&logo=ffmpeg&logoColor=black" alt="FFmpeg"/></a>
 </p>
 
 ## Description
